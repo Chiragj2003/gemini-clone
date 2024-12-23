@@ -5,7 +5,7 @@ import { Context } from '../../context/context';
 import { ChatResponse } from '../ai/chat';
 
 const Main = () => {
-  const { onSent, recentPrompt, showResult, loading, resultData, setInput, input } = useContext(Context);
+  const { onSent, recentPrompt, showResult, loading, resultData, setInput, input, resetChat } = useContext(Context);
 
   const handleSendClick = () => {
     onSent(input);
@@ -14,6 +14,10 @@ const Main = () => {
 
   const handleCardClick = (cardPrompt) => {
     setInput(cardPrompt);
+  };
+
+  const handleNewChat = () => {
+    resetChat(); // Reset all chat-related data
   };
 
   return (
@@ -85,7 +89,7 @@ const Main = () => {
             <div>
               <img className="gallery-icon" src={assets.gallery_icon} alt="Gallery icon" />
               <img className="mic-icon" src={assets.mic_icon} alt="Mic icon" />
-              <img className="send-icon" src={assets.send_icon} alt="Send icon" onClick={handleSendClick} />
+              {input? <img className="send-icon" src={assets.send_icon} alt="Send icon" onClick={handleSendClick} /> : null}
             </div>
           </div>
           <p className="bottom-info">
