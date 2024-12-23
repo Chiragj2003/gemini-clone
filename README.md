@@ -1,8 +1,20 @@
-# React + Vite
+# Gemini Chat Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Gemini is an AI-powered chat app built with React. It allows users to input prompts and get instant responses from an AI assistant, with options for managing chat history and starting new conversations.
 
-Currently, two official plugins are available:
+![Gemini Chat Screenshot](https://drive.google.com/uc?id=1ZDcl_tM0p_MdyK5mIGidx6Lr7jE-R7UZ)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+
+## Features
+
+- **Recent Chats**: View and load previous prompts from the sidebar.
+- **New Chat**: Start a fresh conversation with a click.
+- **Responsive**: Works well on all screen sizes.
+
+
+## Technologies Used
+- **React**
+- **Gemeni API key**
+- **Context API for state management**
+- **CSS for styling**
