@@ -4,7 +4,7 @@ import { assets } from '../../assets/assets';
 import { Context } from '../../context/context'; 
 import { ChatResponse } from '../ai/chat';
 
-const Main = () => {
+const Main = ({ onMenuClick }) => {
   const { onSent, recentPrompt, showResult, loading, resultData, setInput, input, resetChat } = useContext(Context);
 
   const handleSendClick = () => {
@@ -20,10 +20,24 @@ const Main = () => {
     resetChat(); // Reset all chat-related data
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && input.trim()) {
+      handleSendClick();
+    }
+  };
+
   return (
     <div className="main">
       <div className="nav">
-        <p>Gemini</p>
+        <div className="nav-left">
+          <img 
+            src={assets.menu_icon} 
+            alt="Menu" 
+            className="mobile-menu-icon"
+            onClick={onMenuClick}
+          />
+          <p>Gemini</p>
+        </div>
         <img src={assets.user_icon} alt="User Icon" />
       </div>
 
@@ -60,11 +74,11 @@ const Main = () => {
         ) : (
           <div className="result">
             <div className="result-title">
-              <img src={assets.user_icon} alt="" />
+              <img src={assets.user_icon} alt="User" />
               <p>{recentPrompt}</p>
             </div>
             <div className="result-data">
-              <img src={assets.gemini_icon} alt="" />
+              <img src={assets.gemini_icon} alt="Gemini" />
               {loading ? (
                 <div className="loader">
                   <hr />
@@ -82,6 +96,7 @@ const Main = () => {
           <div className="search-box">
             <input
               onChange={(e) => setInput(e.target.value)}
+              onKeyPress={handleKeyPress}
               value={input}
               type="text"
               placeholder="Enter a prompt here..."
@@ -89,7 +104,7 @@ const Main = () => {
             <div>
               <img className="gallery-icon" src={assets.gallery_icon} alt="Gallery icon" />
               <img className="mic-icon" src={assets.mic_icon} alt="Mic icon" />
-              {input? <img className="send-icon" src={assets.send_icon} alt="Send icon" onClick={handleSendClick} /> : null}
+              {input ? <img className="send-icon" src={assets.send_icon} alt="Send icon" onClick={handleSendClick} /> : null}
             </div>
           </div>
           <p className="bottom-info">

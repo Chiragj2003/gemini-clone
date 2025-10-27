@@ -1,25 +1,82 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-*{
+
+:root {
+  --primary-color: #1a73e8;
+  --primary-hover: #1557b0;
+  --secondary-color: #5f6368;
+  --background: #ffffff;
+  --surface: #f8f9fa;
+  --surface-hover: #e8eaed;
+  --text-primary: #202124;
+  --text-secondary: #5f6368;
+  --border-color: #dadce0;
+  --sidebar-bg: #f8f9fa;
+  --card-bg: #ffffff;
+  --input-bg: #f1f3f4;
+  --gradient-start: #4285f4;
+  --gradient-end: #8ab4f8;
+  --shadow-sm: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  --shadow-md: 0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
+  --shadow-lg: 0 2px 6px 2px rgba(60, 64, 67, 0.15), 0 8px 24px 8px rgba(60, 64, 67, 0.15);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+}
+
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Outfit;
+  font-family: 'Google Sans', 'Segoe UI', Tahoma, sans-serif;
 }
 
-#root{
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+
+#root {
   min-height: 100vh;
   display: flex;
-  animation: fadeIn 1.5s;
+  animation: fadeIn 0.4s ease-out;
 }
 
-@keyframes fadeIN{
-  0%{
+@keyframes fadeIn {
+  from {
     opacity: 0;
   }
-  100%{
+  to {
     opacity: 1;
   }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dadce0;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #bdc1c6;
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(66, 133, 244, 0.2);
+  color: var(--text-primary);
 }
