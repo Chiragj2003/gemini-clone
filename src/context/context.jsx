@@ -11,6 +11,13 @@ const ContextProvider = (props) => {
   const [loading, setLoading] = useState(false);
   const [resultData, setResultData] = useState('');
 
+  // Typing animation effect
+  const delayPara = (index, nextWord) => {
+    setTimeout(() => {
+      setResultData(prev => prev + nextWord);
+    }, 75 * index);
+  };
+
   const onSent = async (prompt) => {
     setResultData('');
     setLoading(true);
@@ -22,19 +29,38 @@ const ContextProvider = (props) => {
         response = await runChat(prompt);
         setRecentPrompt(prompt);
         setPrevPrompts((prev) => {
-          return [...prev, prompt];
+          // Avoid duplicate prompts
+          if (!prev.includes(prompt)) {
+            return [...prev, prompt];
+          }
+          return prev;
         });
       } else {
-        setPrevPrompts((prev) => [...prev, input]);
+        setPrevPrompts((prev) => {
+          if (!prev.includes(input)) {
+            return [...prev, input];
+          }
+          return prev;
+        });
         setRecentPrompt(input);
         response = await runChat(input);
       }
 
-      setResultData(response);
-    } catch (error) {
-      setResultData("Error: Unable to fetch data.");
-    } finally {
+      // Typing animation
+      let responseArray = response.split(" ");
+      let newResponse = "";
+      
+      for (let i = 0; i < responseArray.length; i++) {
+        const nextWord = responseArray[i];
+        delayPara(i, nextWord + " ");
+      }
+
       setLoading(false);
+    } catch (error) {
+      console.error("Error in onSent:", error);
+      setResultData("⚠️ Sorry, I encountered an error. Please try again or check your API key.");
+      setLoading(false);
+    } finally {
       setInput('');
     }
   };
